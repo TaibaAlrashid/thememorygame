@@ -1,33 +1,44 @@
 import {useState} from "react";
+/* Data */
 import cards from "../cards";
+/* Components */
 import Card from "./Card";
+/* Styles */
 import { GridStyled } from "../styles";
+
+cards.sort(() => Math.random() - Math.random()); 
 
 const Grid = () => {
     const [_cards, setCards] = useState(cards);
-    const [] = useState();
+    const [firstClick, setFirstClick] = useState(null);
+    const [secondClick, setSecondClick] = useState(null);
 
-    const checkCards = () => {
-        // if the first click store the first card in state
-        // if the second click compare the cards
-        // if cards match keep them up 
-        // else !match close them down
-    };
+    const checkCards = (card) => {
+       // if the first click store the first card in state
+        // if the second click compare the cards 
+            if (firstClick === null ){
+                setFirstClick(card);}
+            else setSecondClick(card);
 
+            if (firstClick?.name === secondClick?.name ) {
+                // setFirstClick({...firstClick, match: true})
+                // console.log(firstClick)
+                // setSecondClick({...secondClick, match: true})
+                return (true);  
+            } else return (false);
+        // // if cards match keep them up
+        // // else !match close them down
+        }
     const cardsList = _cards
-        .map((card) => <Card item={card} checkCards={checkCards}/>)
-        .sort(() => 0.5 - Math.random()); 
-
-    
-// when the player click the first card keep it open 
-// when the player click the second card check if its match keep all them open
-// or if not match close them 
+        .map((card) => <Card item={card} checkCards={checkCards}
+            firstClick={firstClick} setFirstClick={setFirstClick}
+            secondClick={secondClick} setSecondClick={setSecondClick}
+        />)
 
     return (
-    <GridStyled>
-        {cardsList}
-    </GridStyled>
+    <GridStyled>{cardsList}</GridStyled>
     );
 };
 
 export default Grid;
+

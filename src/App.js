@@ -1,11 +1,13 @@
-import './App.css';
-import Card from './components/Card';
-import Grid from './components/Grid';
+import "./App.css";
+/* Components */
+import Grid from "./components/Grid";
+/* Styles */
+import { Header } from "./styles";
 
 function App() {
   return (
     <div>
-      {/* <Card /> */}
+      <Header>The Memory Game</Header>
       <Grid />
     </div>
   );
