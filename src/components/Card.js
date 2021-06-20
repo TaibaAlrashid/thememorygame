@@ -1,22 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 /* Styles */
-import { CardStyled } from "../styles";
+import { CardWrapper, CoverCardStyled, IconCardStyled } from "../styles";
+import ReactCardFlip from "react-card-flip";
 
 const Card = (props) => {
   const [flipped, setFlipped] = useState(props.item.status);
-  const [cardImage, setCardImage] = useState(props.item.cover);
 
   const handleClick = () => {
-    if (flipped === false && props.item.match === false)
-      setCardImage(props.item.icon);
-    else setCardImage(props.item.cover);
     setFlipped(!flipped);
-    if (props.checkCards(props.item)) {
-      console.log("match");
-    } else console.log("not match");
+    props.item.status = true;
+    setTimeout(() => {
+      props.checkCards(props.item);
+    }, 500);
   };
-
-  return <CardStyled onClick={handleClick} src={cardImage} alt={cardImage} />;
+  return (
+    <div>
+      <ReactCardFlip isFlipped={props.item.status} flipDirection="vertical">
+        <CoverCardStyled
+          onClick={handleClick}
+          src={props.item.cover}
+          alt={props.item.name}
+        />
+        <IconCardStyled
+          onClick={handleClick}
+          src={props.item.icon}
+          alt={props.item.name}
+        />
+      </ReactCardFlip>
+    </div>
+  );
 };
 
 export default Card;

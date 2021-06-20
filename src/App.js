@@ -7,7 +7,10 @@ import { Header } from "./styles";
 function App() {
   return (
     <div>
-      <Header>The Memory Game</Header>
+      <Header>
+        The Memory Game
+        <p>Play a memory game with the best memories.</p>
+      </Header>
       <Grid />
     </div>
   );
